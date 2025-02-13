@@ -15,7 +15,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "preact": "^10.25.4",
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "react-router-dom": "^6.29.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.1",
