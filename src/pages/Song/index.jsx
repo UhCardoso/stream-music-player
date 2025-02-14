@@ -1,38 +1,54 @@
-import React from 'react';
-import './style.css';
-import Player from '../../components/Player';
+import React from "react";
+import "./style.css";
+import Player from "../../components/Player";
+import { Link, useParams } from "react-router-dom";
+import { songsArray } from "../../assets/database/songs";
+import { artistArray } from "../../assets/database/artists";
 
 const Song = () => {
-    return (
-        <div className='song'>
-            <div className="song__container">
-                <div className='song__image-container'>
-                    <img
-                        src="https://i.scdn.co/image/ab67616d00001e022774b00531d558bc19e12a24"
-                        alt="Imagem da mnusica x"
-                    />
-                </div>
-            </div>
+  const { id } = useParams();
 
-            <div className='song__bar'>
-                <div className='song__artist-image'>
-                    <img 
-                        src="https://i.scdn.co/image/ab67616d00001e022774b00531d558bc19e12a24"
-                        alt="Imagem do artista x"
-                        width={75}
-                        height={75}
-                    />
-                </div>
+  const randomIndex = Math.floor(
+    Math.random() * (songsArrayFromArtist.length - 1)
+  );
 
-                <Player />
-                
-                <div>
-                    <p className='song__name'>nome da musar</p>
-                    <p>nome do artista</p>
-                </div>
-            </div>
+  const randomIdFromArtist = songsArrayFromArtist[randomIndex].id;
+
+  const songObj = songsArray.filter(
+    (currentSongObj, index) => currentSongObj.id === Number(id)
+  )[0];
+
+  const artistObj = artistArray.filter(
+    (currentArtistObj, index) => currentArtistObj.name === songObj.artist
+  )[0];
+
+  return (
+    <div className="song">
+      <div className="song__container">
+        <div className="song__image-container">
+          <img src={songObj.image} alt={`Imagem da musica ${songObj.name}`} />
         </div>
-    )
-}
+      </div>
+
+      <div className="song__bar">
+        <Link to={`/artist/${artistObj.id}`} className="song__artist-image">
+          <img
+            src={artistObj.image}
+            alt={`Imagem do artista ${artistObj.name}`}
+            width={75}
+            height={75}
+          />
+        </Link>
+
+        <Player duration={songObj.duration} />
+
+        <div>
+          <p className="song__name">{songObj.name}</p>
+          <p>{artistObj.name}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Song;
