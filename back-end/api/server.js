@@ -24,10 +24,10 @@ app.get("/api/songs", async (req, res) => {
   return res.send(await db.collection("songs").find({}).toArray());
 });
 
-app.use(express.static(path.join(__dirname, '../../front-end/dist')));
+app.use(express.static(path.join(__dirname, '../front-end/dist')));
 
 app.get("*", async (req, res) => {
-  return res.sendFile(path.join(__dirname, '../../front-end/dist/index.html'));
+  return res.sendFile(path.join(__dirname, '../front-end/dist/index.html'));
 });
 
 app.listen(PORT, () => {
